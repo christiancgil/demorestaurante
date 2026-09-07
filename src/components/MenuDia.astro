@@ -1,0 +1,112 @@
+---
+---
+<section id="menu-dia" class="py-24 px-6 bg-bg relative overflow-hidden">
+
+  <!-- Elemento decorativo de fondo -->
+  <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-primary/5"></div>
+  <div class="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-accent/5"></div>
+
+  <div class="max-w-5xl mx-auto">
+    <!-- Encabezado -->
+    <div class="text-center mb-16">
+      <p class="font-body text-gold uppercase tracking-[0.3em] text-sm mb-2">Almuerzo completo</p>
+      <h2 class="font-script text-5xl md:text-6xl text-primary mb-4">Menú del Día</h2>
+      <div class="w-24 h-0.5 bg-gold mx-auto"></div>
+    </div>
+
+    <!-- Tarjeta del menú -->
+    <div
+      id="menu-card"
+      class="bg-off-white rounded-2xl shadow-2xl overflow-hidden max-w-2xl mx-auto border border-gold/20"
+    >
+      <!-- Header precio -->
+      <div class="bg-primary text-off-white text-center py-6">
+        <p class="font-body uppercase tracking-widest text-sm text-gold mb-1">Precio</p>
+        <p class="font-script text-5xl">$15.000</p>
+      </div>
+
+      <!-- Categorías -->
+      <div class="divide-y divide-gold/20">
+
+        <div class="p-6 flex gap-6 items-start">
+          <div class="text-2xl">🍵</div>
+          <div>
+            <h3 class="font-body font-bold text-primary uppercase tracking-wider text-sm mb-2">Entrada</h3>
+            <ul class="font-body text-dark/80 space-y-1 text-sm">
+              <li>Sopa de cebada</li>
+              <li>Crema de zanahoria</li>
+              <li>Gelatina</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-6 flex gap-6 items-start">
+          <div class="text-2xl">🫘</div>
+          <div>
+            <h3 class="font-body font-bold text-primary uppercase tracking-wider text-sm mb-2">Principio</h3>
+            <ul class="font-body text-dark/80 space-y-1 text-sm">
+              <li>Frijol</li>
+              <li>Lenteja</li>
+              <li>Verdura fría</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-6 flex gap-6 items-start">
+          <div class="text-2xl">🥩</div>
+          <div>
+            <h3 class="font-body font-bold text-primary uppercase tracking-wider text-sm mb-2">Proteína</h3>
+            <ul class="font-body text-dark/80 space-y-1 text-sm">
+              <li>Carne asada o bistec</li>
+              <li>Lomo</li>
+              <li>Pollo dorado</li>
+              <li>Pechuga en salsa de tocineta</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-6 flex gap-6 items-start">
+          <div class="text-2xl">🥤</div>
+          <div>
+            <h3 class="font-body font-bold text-primary uppercase tracking-wider text-sm mb-2">Bebida</h3>
+            <ul class="font-body text-dark/80 space-y-1 text-sm">
+              <li>Jugo de mora</li>
+              <li>Limonada de panela</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="bg-gold/10 text-center py-5 border-t border-gold/20">
+        <p class="font-body text-sm text-dark/60 mb-3">¿Lo pedimos a tu puerta?</p>
+        <a
+          href="https://wa.me/573103775506?text=Hola,%20quiero%20pedir%20el%20Men%C3%BA%20del%20D%C3%ADa"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 bg-primary text-off-white font-body text-sm px-6 py-2 rounded-full hover:bg-green-800 transition-colors"
+        >
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  gsap.from('#menu-card', {
+    opacity: 0,
+    y: 60,
+    duration: 0.8,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#menu-dia',
+      start: 'top 75%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+</script>
