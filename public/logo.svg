@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Outer red circle border -->
+  <circle cx="100" cy="100" r="98" fill="#C0392B"/>
+  <!-- Inner gold/yellow circle -->
+  <circle cx="100" cy="100" r="90" fill="#F4C430"/>
+  <!-- Sun rays at top -->
+  <path d="M100 20 L108 50 L100 45 L92 50 Z" fill="#F4C430"/>
+  <path d="M130 28 L128 58 L120 52 L118 46 Z" fill="#E8A020"/>
+  <path d="M70 28 L72 58 L80 52 L82 46 Z" fill="#E8A020"/>
+  <!-- Green mountains background -->
+  <path d="M20 140 L55 80 L80 110 L100 75 L120 110 L145 80 L180 140 Z" fill="#1B4D1E"/>
+  <!-- Lighter green hills -->
+  <path d="M20 155 L50 115 L70 135 L90 120 L100 130 L110 120 L130 135 L150 115 L180 155 Z" fill="#2D7A2D"/>
+  <!-- Snow cap on main peak -->
+  <path d="M100 75 L112 95 L100 90 L88 95 Z" fill="#FDFAF4"/>
+  <!-- Ground/base area -->
+  <path d="M15 155 Q100 165 185 155 L185 185 Q100 195 15 185 Z" fill="#1B4D1E"/>
+  <!-- Red circle border overlay -->
+  <circle cx="100" cy="100" r="98" fill="none" stroke="#C0392B" stroke-width="4"/>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#8B0000" stroke-width="1"/>
+</svg>
