@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #F5EDD6;
+  --color-primary: #1B4D1E;
+  --color-accent: #C0392B;
+  --color-gold: #B8860B;
+  --color-dark: #2C1810;
+  --color-white: #FDFAF4;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--color-dark);
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Dancing Script', cursive;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
