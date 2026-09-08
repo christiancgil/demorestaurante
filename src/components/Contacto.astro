@@ -58,7 +58,7 @@
       </div>
 
       <!-- Mapa -->
-      <div class="relative">
+      <div id="contacto-map" class="relative">
         <div class="absolute -top-3 -left-3 right-3 bottom-3 border border-gold/20 pointer-events-none"></div>
         <div class="overflow-hidden shadow-2xl relative z-10" style="height: 420px;">
           <iframe
@@ -76,3 +76,25 @@
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  gsap.set('#contacto .heading-rule', { scaleX: 0, transformOrigin: 'center' })
+  gsap.to('#contacto .heading-rule', {
+    scaleX: 1, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#contacto', start: 'top 75%', toggleActions: 'play none none reverse' },
+  })
+
+  gsap.from('#contacto-map', {
+    opacity: 0,
+    y: reduced ? 0 : 30,
+    duration: 0.7,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#contacto', start: 'top 65%', toggleActions: 'play none none reverse' },
+  })
+</script>

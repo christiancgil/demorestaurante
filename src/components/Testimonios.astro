@@ -78,22 +78,26 @@ const testimonios = [
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
-  gsap.to('#test-food-img', {
-    yPercent: 15,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#testimonios',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true,
-    },
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  gsap.set('#testimonios .heading-rule', { scaleX: 0, transformOrigin: 'left' })
+  gsap.to('#testimonios .heading-rule', {
+    scaleX: 1, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#testimonios', start: 'top 75%', toggleActions: 'play none none reverse' },
   })
+
+  if (!reduced) {
+    gsap.to('#test-food-img', {
+      yPercent: 15, ease: 'none',
+      scrollTrigger: { trigger: '#testimonios', start: 'top bottom', end: 'bottom top', scrub: true },
+    })
+  }
 
   gsap.from('.testimonio-card', {
     opacity: 0,
-    x: -30,
-    stagger: 0.2,
-    duration: 0.9,
+    x: reduced ? 0 : -30,
+    stagger: 0.15,
+    duration: 0.7,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: '#testimonios',
