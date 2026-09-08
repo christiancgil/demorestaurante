@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"D:\\\\Repositorios\\\\demorestaurante\"; Get-Item -Path \"public\\\\logo.svg\", \"public\\\\images\\\\hero-bg.jpg\", \"public\\\\images\\\\nosotros.jpg\", \"public\\\\images\\\\food-1.jpg\", \"public\\\\images\\\\food-2.jpg\", \"public\\\\images\\\\food-3.jpg\" -ErrorAction SilentlyContinue | Select-Object FullName, @{n='Size\\(bytes\\)';e={$_.Length}})"
+    ]
+  }
+}
