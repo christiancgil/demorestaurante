@@ -1,0 +1,97 @@
+---
+const testimonios = [
+  {
+    nombre: 'María Rodríguez',
+    texto: 'El menú del día es una delicia. La sopa de cebada me recuerda a la comida de mi abuela. ¡Siempre vuelvo!',
+    avatar: 'MR',
+    color: 'bg-primary',
+  },
+  {
+    nombre: 'Carlos Gómez',
+    texto: 'La Bandeja Paisa es impresionante, abundante y deliciosa. El mejor restaurante del barrio sin duda.',
+    avatar: 'CG',
+    color: 'bg-accent',
+  },
+  {
+    nombre: 'Luisa Martínez',
+    texto: 'El churrasco especial es espectacular. Los domicilios son rápidos y la comida llega perfecta. 10/10.',
+    avatar: 'LM',
+    color: 'bg-gold',
+  },
+]
+---
+<section id="testimonios" class="py-24 px-6 bg-dark relative overflow-hidden">
+
+  <!-- Imagen grande con parallax (estilo del video de referencia) -->
+  <div id="test-food-wrap" class="absolute right-0 top-0 bottom-0 w-1/2 overflow-hidden hidden lg:block opacity-20">
+    <img
+      id="test-food-img"
+      src="/images/food-1.jpg"
+      alt=""
+      class="w-full h-full object-cover scale-110"
+    />
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="lg:max-w-xl">
+      <p class="font-body text-gold uppercase tracking-[0.3em] text-sm mb-2">Lo que dicen</p>
+      <h2 class="font-script text-5xl md:text-6xl text-off-white mb-4">Nuestros Clientes</h2>
+      <div class="w-24 h-0.5 bg-gold mb-16"></div>
+
+      <div class="space-y-8">
+        {testimonios.map((t, i) => (
+          <div class={`testimonio-card bg-off-white/5 border border-off-white/10 rounded-2xl p-6 backdrop-blur-sm`}>
+            <p class="font-body text-off-white/80 text-base leading-relaxed mb-6 italic">
+              "{t.texto}"
+            </p>
+            <div class="flex items-center gap-3">
+              <div class={`${t.color} w-10 h-10 rounded-full flex items-center justify-center font-body font-bold text-white text-sm flex-shrink-0`}>
+                {t.avatar}
+              </div>
+              <div>
+                <p class="font-body font-bold text-off-white text-sm">{t.nombre}</p>
+                <div class="flex gap-0.5 mt-0.5">
+                  {[1,2,3,4,5].map(() => (
+                    <span class="text-gold text-xs">★</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  // Parallax imagen de fondo
+  gsap.to('#test-food-img', {
+    yPercent: 15,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#testimonios',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+
+  // Cards testimonios entrada escalonada
+  gsap.from('.testimonio-card', {
+    opacity: 0,
+    x: -40,
+    stagger: 0.25,
+    duration: 0.7,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#testimonios',
+      start: 'top 70%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+</script>
