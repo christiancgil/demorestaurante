@@ -9,47 +9,43 @@
     style="background-image: url('/images/hero-bg.jpg')"
   ></div>
 
-  <!-- Overlay: gradiente dramático, más oscuro en centro y bordes -->
+  <!-- Overlay gradiente dramático -->
   <div class="absolute inset-0"
     style="background: linear-gradient(to bottom, rgba(26,13,8,0.55) 0%, rgba(26,13,8,0.72) 50%, rgba(26,13,8,0.88) 100%)">
   </div>
 
-  <!-- Elemento flotante 1: línea vertical dorada -->
+  <!-- Flotante 1: línea vertical + punto -->
   <div id="float-1" class="absolute top-24 right-20 flex flex-col items-center gap-2 opacity-40">
     <div class="w-px h-16 bg-gold-light"></div>
     <div class="w-1.5 h-1.5 rounded-full bg-gold-light"></div>
   </div>
 
-  <!-- Elemento flotante 2: ornamento circular -->
+  <!-- Flotante 2: círculo doble -->
   <div id="float-2" class="absolute bottom-36 left-16 w-20 h-20 rounded-full border border-gold/30 opacity-50 flex items-center justify-center">
     <div class="w-12 h-12 rounded-full border border-gold/20"></div>
   </div>
 
-  <!-- Elemento flotante 3: línea horizontal -->
+  <!-- Flotante 3: línea horizontal -->
   <div id="float-3" class="absolute top-1/2 left-8 w-12 h-px bg-gold/25"></div>
 
-  <!-- Contenido principal -->
-  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-
-    <!-- Logo -->
+  <!-- Contenido -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
     <img
-      src="/logo.svg"
+      src="/images/LogoCordillera.jpg"
       alt="Logo Cordillera del Sabor"
       id="hero-logo"
       class="w-20 h-20 rounded-full object-cover mx-auto mb-8 border border-gold/40 shadow-2xl opacity-0"
     />
 
-    <!-- Título firma en Dancing Script -->
     <h1 id="hero-title" class="font-script text-7xl md:text-9xl text-off-white mb-0 leading-none opacity-0">
       Cordillera del Sabor
     </h1>
 
-    <!-- Underline dorado animado (el elemento firma) -->
+    <!-- Underline firma: scaleX desde centro (no width — evita layout) -->
     <div class="flex justify-center mb-8 mt-3">
-      <div id="hero-underline" class="h-px bg-gold-light" style="width: 0"></div>
+      <div id="hero-underline" class="h-px bg-gold-light" style="width: 260px;"></div>
     </div>
 
-    <!-- Subtitle en Playfair italic -->
     <p class="font-serif italic text-off-white/70 text-lg md:text-xl mb-12 opacity-0" id="hero-sub">
       Sabor auténtico de la Cordillera Colombiana · Barrio Madelena
     </p>
@@ -57,7 +53,7 @@
     <div class="flex flex-col sm:flex-row items-center justify-center gap-5 opacity-0" id="hero-ctas">
       <a
         href="#menu-dia"
-        class="px-8 py-3.5 bg-primary hover:bg-primary-deep text-off-white font-body uppercase tracking-[0.2em] text-xs transition-all duration-300 hover:shadow-lg"
+        class="cta-press px-8 py-3.5 bg-primary hover:bg-primary-deep text-off-white font-body uppercase tracking-[0.2em] text-xs transition-[background-color] duration-150"
       >
         Ver Menú
       </a>
@@ -65,76 +61,83 @@
         href="https://wa.me/573103775506?text=Hola,%20quiero%20hacer%20un%20pedido"
         target="_blank"
         rel="noopener"
-        class="px-8 py-3.5 border border-off-white/40 hover:border-gold text-off-white hover:text-gold font-body uppercase tracking-[0.2em] text-xs transition-all duration-300"
+        class="cta-press px-8 py-3.5 border border-off-white/40 hover:border-gold text-off-white hover:text-gold font-body uppercase tracking-[0.2em] text-xs transition-[border-color,color] duration-150"
       >
         Pedir a Domicilio
       </a>
     </div>
   </div>
 
-  <!-- Scroll indicator: línea animada -->
+  <!-- Scroll indicator: línea con partícula animada -->
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0" id="hero-scroll">
     <span class="font-body text-off-white/40 uppercase tracking-widest text-[10px]">Scroll</span>
     <div class="w-px h-10 bg-off-white/20 relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full bg-gold-light animate-[slideDown_1.8s_ease-in-out_infinite]" style="height: 40%; animation: slideDown 1.8s ease-in-out infinite;"></div>
+      <div class="scroll-line-inner absolute top-0 left-0 w-full bg-gold-light" style="height: 40%;"></div>
     </div>
   </div>
 </section>
 
 <style>
+  /* linear: movimiento constante → linear per Emil Kowalski */
   @keyframes slideDown {
     0%   { transform: translateY(-100%); opacity: 1; }
     100% { transform: translateY(400%); opacity: 0; }
+  }
+  .scroll-line-inner {
+    animation: slideDown 1.8s linear infinite;
   }
 </style>
 
 <script>
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
   gsap.registerPlugin(ScrollTrigger)
 
-  // Parallax de fondo
-  gsap.to('#hero-bg', {
-    yPercent: 30,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-    },
-  })
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // Flotantes a distintas velocidades
-  gsap.to('#float-1', {
-    yPercent: -90,
-    ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
-  })
-  gsap.to('#float-2', {
-    yPercent: -110,
-    x: 20,
-    ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 2 },
-  })
-  gsap.to('#float-3', {
-    yPercent: -60,
-    ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 },
-  })
+  if (!reduced) {
+    // Parallax de fondo
+    gsap.to('#hero-bg', {
+      yPercent: 30,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
+    })
 
-  // Entrada orquestada
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-  tl.to('#hero-logo',    { opacity: 1, y: 0, duration: 0.9 }, 0.3)
-  tl.to('#hero-title',   { opacity: 1, y: 0, duration: 1.1 }, 0.7)
-  tl.to('#hero-underline', { width: '260px', duration: 1.4, ease: 'power2.out' }, 1.5)
-  tl.to('#hero-sub',   { opacity: 1, y: 0, duration: 0.9 }, 1.6)
-  tl.to('#hero-ctas',  { opacity: 1, y: 0, duration: 0.8 }, 1.9)
-  tl.to('#hero-scroll',{ opacity: 1, duration: 0.6 }, 2.3)
+    // Flotantes
+    gsap.to('#float-1', {
+      yPercent: -90, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
+    })
+    gsap.to('#float-2', {
+      yPercent: -110, x: 20, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 2 },
+    })
+    gsap.to('#float-3', {
+      yPercent: -60, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 },
+    })
 
-  gsap.set('#hero-logo',    { y: -20 })
-  gsap.set('#hero-title',   { y: 30 })
-  gsap.set('#hero-sub',     { y: 20 })
-  gsap.set('#hero-ctas',    { y: 20 })
+    // Entrada orquestada
+    gsap.set('#hero-logo',  { y: -20 })
+    gsap.set('#hero-title', { y: 30 })
+    gsap.set('#hero-sub',   { y: 20 })
+    gsap.set('#hero-ctas',  { y: 20 })
+    // Underline: scaleX en lugar de width (no dispara layout)
+    gsap.set('#hero-underline', { scaleX: 0, transformOrigin: 'center' })
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    tl.to('#hero-logo',      { opacity: 1, y: 0, duration: 0.9 }, 0.3)
+    tl.to('#hero-title',     { opacity: 1, y: 0, duration: 1.1 }, 0.7)
+    tl.to('#hero-underline', { scaleX: 1, duration: 1.4, ease: 'power2.out' }, 1.5)
+    tl.to('#hero-sub',       { opacity: 1, y: 0, duration: 0.9 }, 1.6)
+    tl.to('#hero-ctas',      { opacity: 1, y: 0, duration: 0.8 }, 1.9)
+    tl.to('#hero-scroll',    { opacity: 1, duration: 0.6 }, 2.3)
+
+  } else {
+    // Reduced motion: solo fade, sin movimiento
+    gsap.to(['#hero-logo', '#hero-title', '#hero-underline', '#hero-sub', '#hero-ctas', '#hero-scroll'], {
+      opacity: 1, duration: 0.4, stagger: 0.1,
+    })
+    gsap.set('#hero-underline', { scaleX: 1 })
+  }
 </script>
