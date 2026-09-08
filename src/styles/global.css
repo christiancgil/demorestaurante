@@ -4,10 +4,14 @@
 
 :root {
   --color-bg: #F5EDD6;
+  --color-parchment: #EDE3C8;
   --color-primary: #1B4D1E;
+  --color-primary-deep: #0D2910;
   --color-accent: #C0392B;
   --color-gold: #B8860B;
-  --color-dark: #2C1810;
+  --color-gold-light: #D4AA30;
+  --color-dark: #1A0D08;
+  --color-dark-mid: #2C1810;
   --color-white: #FDFAF4;
 }
 
@@ -22,11 +26,89 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3 {
+/* Section headings use the elegant serif */
+h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* h1 keeps script for the hero signature moment */
+h1 {
   font-family: 'Dancing Script', cursive;
+}
+
+/* Nav hover underline */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold-light);
+  transition: width 0.35s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Chalkboard texture for MenuDia */
+.chalkboard {
+  background-color: var(--color-primary-deep);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(255,255,255,0.03) 28px,
+      rgba(255,255,255,0.03) 29px
+    );
+}
+
+/* Section heading gold rule */
+.heading-rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold);
+  margin-top: 0.75rem;
+}
+
+/* Decorative quote mark */
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-gold);
+  opacity: 0.25;
+  font-style: italic;
+  user-select: none;
 }
 
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-white);
+}
+
+/* Keyboard focus — visible, branded */
+:focus-visible {
+  outline: 1.5px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
 }
