@@ -13,6 +13,11 @@
   --color-dark: #1A0D08;
   --color-dark-mid: #2C1810;
   --color-white: #FDFAF4;
+
+  /* Easing tokens — Emil Kowalski animation standards */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 html {
@@ -26,17 +31,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Section headings use the elegant serif */
 h2, h3 {
   font-family: 'Playfair Display', serif;
 }
 
-/* h1 keeps script for the hero signature moment */
 h1 {
   font-family: 'Dancing Script', cursive;
 }
 
-/* Nav hover underline */
+/* Nav hover underline — ease-out per Emil standards (entering = ease-out) */
 .nav-link {
   position: relative;
 }
@@ -48,10 +51,16 @@ h1 {
   width: 0;
   height: 1px;
   background: var(--color-gold-light);
-  transition: width 0.35s ease;
+  transition: width 0.25s var(--ease-out);
 }
 .nav-link:hover::after {
   width: 100%;
+}
+
+/* Press feedback — subtle scale on all interactive CTAs */
+.cta-press:active {
+  transform: scale(0.97);
+  transition: transform 100ms var(--ease-out) !important;
 }
 
 /* Chalkboard texture for MenuDia */
@@ -73,7 +82,6 @@ h1 {
   width: 2.5rem;
   height: 1px;
   background: var(--color-gold);
-  margin-top: 0.75rem;
 }
 
 /* Decorative quote mark */
@@ -87,12 +95,13 @@ h1 {
   user-select: none;
 }
 
+/* Text selection */
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-white);
 }
 
-/* Keyboard focus — visible, branded */
+/* Keyboard focus — branded */
 :focus-visible {
   outline: 1.5px solid var(--color-gold);
   outline-offset: 3px;
@@ -107,8 +116,13 @@ h1 {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-gold);
-  opacity: 0.6;
 }
-::-webkit-scrollbar-thumb:hover {
-  opacity: 1;
+
+/* Reduced motion — keep color/opacity, kill movement */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-line-inner {
+    animation: none !important;
+    opacity: 0.4;
+  }
+  /* GSAP script blocks check window.matchMedia separately */
 }

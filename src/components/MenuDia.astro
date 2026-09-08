@@ -50,7 +50,7 @@ const cursos = [
       <!-- Cursos -->
       <div class="px-10 pb-4">
         {cursos.map((curso, i) => (
-          <div class={`py-6 ${i < cursos.length - 1 ? 'border-b' : ''}`} style="border-color: rgba(232,223,208,0.12);">
+          <div class={`curso-item py-6 ${i < cursos.length - 1 ? 'border-b' : ''}`} style="border-color: rgba(232,223,208,0.12);">
             <p class="font-body uppercase tracking-[0.35em] text-xs text-gold-light/70 mb-3">{curso.titulo}</p>
             <div class="flex flex-wrap gap-x-6 gap-y-1">
               {curso.items.map(item => (
@@ -84,15 +84,35 @@ const cursos = [
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  gsap.set('#menu-dia .heading-rule', { scaleX: 0, transformOrigin: 'center' })
+  gsap.to('#menu-dia .heading-rule', {
+    scaleX: 1, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#menu-dia', start: 'top 75%', toggleActions: 'play none none reverse' },
+  })
+
   gsap.from('#menu-card', {
     opacity: 0,
-    y: 50,
-    duration: 1,
+    y: reduced ? 0 : 50,
+    duration: 0.7,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: '#menu-dia',
       start: 'top 70%',
       toggleActions: 'play none none reverse',
     },
+    onComplete: () => {
+      if (!reduced) {
+        // Stagger de cursos: efecto "tiza apareciendo en el pizarrón"
+        gsap.from('#menu-card .curso-item', {
+          opacity: 0,
+          x: -12,
+          stagger: 0.1,
+          duration: 0.45,
+          ease: 'power2.out',
+        })
+      }
+    }
   })
 </script>

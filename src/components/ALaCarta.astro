@@ -44,7 +44,7 @@ const platos = [
     <div id="cartas-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {platos.map((plato) => (
         <div
-          class="carta-card group relative bg-off-white/[0.04] hover:bg-off-white/[0.07] transition-all duration-500 overflow-hidden"
+          class="carta-card group relative bg-off-white/[0.04] hover:bg-off-white/[0.07] transition-[background-color] duration-300 overflow-hidden"
           style={`border-top: 2px solid ${plato.accent};`}
         >
           <!-- Categoría -->
@@ -83,7 +83,7 @@ const platos = [
         href="https://wa.me/573103775506?text=Hola,%20quiero%20ver%20el%20men%C3%BA%20a%20la%20carta"
         target="_blank"
         rel="noopener"
-        class="inline-flex items-center gap-3 border border-gold/40 hover:border-gold text-gold hover:bg-gold hover:text-dark font-body uppercase tracking-[0.25em] text-xs px-10 py-4 transition-all duration-300"
+        class="cta-press inline-flex items-center gap-3 border border-gold/40 hover:border-gold text-gold hover:bg-gold hover:text-dark font-body uppercase tracking-[0.25em] text-xs px-10 py-4 transition-[background-color,border-color,color] duration-150"
       >
         Consultar por WhatsApp
       </a>
@@ -96,11 +96,19 @@ const platos = [
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  gsap.set('#a-la-carta .heading-rule', { scaleX: 0, transformOrigin: 'center' })
+  gsap.to('#a-la-carta .heading-rule', {
+    scaleX: 1, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '#a-la-carta', start: 'top 75%', toggleActions: 'play none none reverse' },
+  })
+
   gsap.from('.carta-card', {
     opacity: 0,
-    y: 40,
-    stagger: 0.15,
-    duration: 0.9,
+    y: reduced ? 0 : 40,
+    stagger: 0.12,
+    duration: 0.65,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: '#a-la-carta',
